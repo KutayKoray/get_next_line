@@ -1,10 +1,31 @@
 #include <stdlib.h>
+#include <stdio.h>
+
+void    *ft_calloc(size_t count, size_t size)
+{
+    unsigned char   *tmp;
+    size_t          i;
+
+    tmp = malloc(size * count);
+    if (!tmp)
+        return (NULL);
+    i = 0;
+    while (i < size * count)
+    {
+        *(tmp + i) = 0;
+        i++;
+                                                                                                
+    }
+    return (tmp);                                        
+}
 
 size_t	ft_strlen(const char *str)
 {
 	int	i;
 
-	i = 0;
+	if(!str)
+        return 0;
+    i = 0;
 	while (str[i])
 	{
 		i++;
@@ -12,44 +33,45 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strrchr(const char *s, int c)
+char *ft_strchr(const char *string, int searchedChar )
 {
-	unsigned int	i;
-	char			*tmp;
-	char			cc;
+    char    *str;
 
-	cc = (char)c;
-	tmp = NULL;
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == cc)
-			tmp = (char *)(s + i);
-		i++;
-	}
-	if (s[i] == cc)
-		tmp = (char *)(s + i);
-	return (tmp);
+    str = (char *)string;
+
+    while (*str != searchedChar && *str != 0)
+        str++;
+    if (*str == searchedChar)
+        return (str);
+    else
+        return (NULL);                    
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
+	int		sizetotal;
+	char	*res;
+	int		i;
+	int		j;
 
-	if (!s1 || !s2)
-		return (NULL);
-	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
 	i = 0;
+	sizetotal = ft_strlen(s1) + ft_strlen(s2);
+	res = ft_calloc((sizetotal + 1), sizeof(char));
+	if (!res || !s1 || !s2)
+		return ("hata");
+	while (s1[i] != 0)
+	{
+		res[i] = s1[i];
+		i++;
+	}
 	j = 0;
-	while (s1[i])
-		str[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		str[j++] = s2[i++];
-	str[j] = 0;
-	return (str);
+	while (s2[j] != 0)
+	{
+		res[i] = s2[j];
+		i++;
+		j++;
+	}
+	res[sizetotal] = 0;
+	printf("res batırıldı: %s\n", res);
+	return (res);
 }
