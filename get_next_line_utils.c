@@ -1,31 +1,42 @@
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/26 17:53:24 by kkoray            #+#    #+#             */
+/*   Updated: 2024/10/27 13:20:17 by kkoray           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
+#include <stdlib.h>
 
-void    *ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
-    unsigned char   *tmp;
-    size_t          i;
+	unsigned char	*tmp;
+	size_t			i;
 
-    tmp = malloc(size * count);
-    if (!tmp)
-        return (NULL);
-    i = 0;
-    while (i < size * count)
-    {
-        *(tmp + i) = 0;
-        i++;
-                                                                                                
-    }
-    return (tmp);                                        
+	tmp = malloc(size * count);
+	if (!tmp)
+		return (NULL);
+	i = 0;
+	while (i < size * count)
+	{
+		*(tmp + i) = 0;
+		i++;
+	}
+	return (tmp);
 }
 
 size_t	ft_strlen(const char *str)
 {
 	int	i;
 
-	if(!str)
-        return 0;
-    i = 0;
+	if (!str)
+		return (0);
+	i = 0;
 	while (str[i])
 	{
 		i++;
@@ -33,18 +44,17 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char *ft_strchr(const char *string, int searchedChar )
+char	*ft_strchr(const char *string, int searchedChar)
 {
-    char    *str;
+	char	*str;
 
-    str = (char *)string;
-
-    while (*str != searchedChar && *str != 0)
-        str++;
-    if (*str == searchedChar)
-        return (str);
-    else
-        return (NULL);                    
+	str = (char *)string;
+	while (*str != searchedChar && *str != 0)
+		str++;
+	if (*str == searchedChar)
+		return (str);
+	else
+		return (NULL);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -58,7 +68,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	sizetotal = ft_strlen(s1) + ft_strlen(s2);
 	res = ft_calloc((sizetotal + 1), sizeof(char));
 	if (!res || !s1 || !s2)
-		return ("hata");
+		return (NULL);
 	while (s1[i] != 0)
 	{
 		res[i] = s1[i];
@@ -72,6 +82,23 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	res[sizetotal] = 0;
-	printf("res batırıldı: %s\n", res);
 	return (res);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*dest;
+	size_t	i;
+
+	dest = (char *)malloc(ft_strlen(s1) + 1);
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	dest[i] = 0;
+	return (dest);
 }
