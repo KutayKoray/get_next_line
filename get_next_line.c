@@ -31,6 +31,11 @@ char	*get_next_line(int fd)
 	if (!buffer)
 		return (NULL);
 	line = get_line(buffer);
+	if (line == NULL)
+	{
+		free(buffer);
+		buffer = NULL;
+	}
 	return (line);
 }
 
@@ -96,7 +101,7 @@ static char	*read_file(int fd, char *buffer)
 		if (readed_bytes == -1)
 			return (free(tmp_str), NULL);
 		if (readed_bytes == 0)
-			return (free(tmp_str), free(buffer), NULL);
+			return (free(tmp_str), buffer);
 		tmp_buf = ft_strjoin(buffer, tmp_str);
 		free(buffer);
 		buffer = tmp_buf;
@@ -106,20 +111,19 @@ static char	*read_file(int fd, char *buffer)
 	return (free(tmp_str), buffer);
 }
 
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*str;
-// 	int		i;
+int	main(void)
+{
+	int		fd;
+	char	*str;
+	int		i;
 
-// 	fd = open("test.txt", O_RDWR | O_CREAT, 0777);
-// 	i = 0;
-// 	while (i < 1)
-// 	{
-// 		str = get_next_line(fd);
-// 		printf("get_next_line():%s", str);
-// 		i++;
-// 		free(str);
-// 	}
-
-// }
+	fd = open("./texts/one_line_no_nl.txt", O_RDWR | O_CREAT, 0777);
+	i = 0;
+	while (i < 4)
+	{
+		str = get_next_line(fd);
+		printf("get_next_line():%s", str);
+		i++;
+		free(str);
+	}
+}
