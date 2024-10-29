@@ -19,6 +19,20 @@
 static char	*read_file(int fd, char *buffer);
 static char	*get_line(char *buffer);
 static char	*update_buffer(char *buffer, int i);
+void	*ft_memset(void *b, int c, size_t len);
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)b;
+	while (len > 0)
+	{
+		*(ptr++) = (unsigned char)c;
+		len--;
+	}
+	return (b);
+}
 
 char	*get_next_line(int fd)
 {
@@ -104,6 +118,7 @@ static char	*read_file(int fd, char *buffer)
 			return (free(tmp_str), buffer);
 		tmp_buf = ft_strjoin(buffer, tmp_str);
 		free(buffer);
+		ft_memset(tmp_str, 0, BUFFER_SIZE + 1);
 		buffer = tmp_buf;
 		if (ft_strchr(buffer, '\n'))
 			break ;
@@ -117,9 +132,9 @@ int	main(void)
 	char	*str;
 	int		i;
 
-	fd = open("./texts/one_line_no_nl.txt", O_RDWR | O_CREAT, 0777);
+	fd = open("./texts/test.txt", O_RDWR | O_CREAT, 0777);
 	i = 0;
-	while (i < 4)
+	while (i < 1)
 	{
 		str = get_next_line(fd);
 		printf("get_next_line():%s", str);
