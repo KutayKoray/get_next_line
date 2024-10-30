@@ -6,11 +6,10 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:53:24 by kkoray            #+#    #+#             */
-/*   Updated: 2024/10/27 13:20:17 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/10/30 20:51:37 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
 
 void	*ft_calloc(size_t count, size_t size)
@@ -85,20 +84,36 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-char	*ft_strdup(const char *s1)
+int check_null(char *str)
 {
-	char	*dest;
-	size_t	i;
+	int i;
 
-	dest = (char *)malloc(ft_strlen(s1) + 1);
-	if (!dest)
-		return (NULL);
 	i = 0;
-	while (s1[i])
-	{
-		dest[i] = s1[i];
+	if (!str)
+		return (-1);
+	while (str[i] != '\0')
 		i++;
-	}
-	dest[i] = 0;
-	return (dest);
+	if (str[i] == '0')
+		return (1);
+	else
+		return (0);
+	return (-1);
 }
+
+// char	*ft_strdup(const char *s1)
+// {
+// 	char	*dest;
+// 	size_t	i;
+
+// 	dest = (char *)malloc(ft_strlen(s1) + 1);
+// 	if (!dest)
+// 		return (NULL);
+// 	i = 0;
+// 	while (s1[i])
+// 	{
+// 		dest[i] = s1[i];
+// 		i++;
+// 	}
+// 	dest[i] = 0;
+// 	return (dest);
+// }

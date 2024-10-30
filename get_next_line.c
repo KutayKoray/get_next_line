@@ -6,7 +6,7 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:48:23 by kkoray            #+#    #+#             */
-/*   Updated: 2024/10/27 13:40:03 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/10/30 20:53:12 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 static char	*read_file(int fd, char *buffer);
 static char	*get_line(char *buffer);
 static char	*update_buffer(char *buffer, int i);
-void	*ft_memset(void *b, int c, size_t len);
+void		*ft_memset(void *b, int c, size_t len);
 
 void	*ft_memset(void *b, int c, size_t len)
 {
@@ -71,7 +71,12 @@ static char	*get_line(char *buffer)
 		i++;
 	}
 	buffer = update_buffer(buffer, i);
-	line[i] = '\n';
+	if (check_null(line) == 1)
+		line[i] = '\0';
+	else if (check_null(line) == -1)
+		return (NULL);
+	else
+		line[i] = '\n';
 	return (line);
 }
 
@@ -132,9 +137,9 @@ int	main(void)
 	char	*str;
 	int		i;
 
-	fd = open("./texts/test.txt", O_RDWR | O_CREAT, 0777);
+	fd = open("./texts/variable_nls.txt", O_RDWR | O_CREAT, 0777);
 	i = 0;
-	while (i < 1)
+	while (i < 13)
 	{
 		str = get_next_line(fd);
 		printf("get_next_line():%s", str);
