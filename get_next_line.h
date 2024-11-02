@@ -6,7 +6,7 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:53:21 by kkoray            #+#    #+#             */
-/*   Updated: 2024/10/30 20:51:09 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/11/02 15:24:02 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
-int check_null(char *str);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+
 
 #endif

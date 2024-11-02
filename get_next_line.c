@@ -6,7 +6,7 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:48:23 by kkoray            #+#    #+#             */
-/*   Updated: 2024/11/02 12:09:53 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/11/02 15:47:00 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		free(buffer);
+		buffer = NULL;
 		return (NULL);
+	}
 	buffer = read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);
@@ -82,13 +86,12 @@ static char	*update_buffer(char *buffer, int i)
 {
 	int	j;
 
-	i += 1;
 	j = 0;
 	if (!buffer)
 		return (NULL);
-	while (buffer[i] != '\0')
+	while (buffer[i] && buffer[i + 1] != '\0')
 	{
-		buffer[j] = buffer[i];
+		buffer[j] = buffer[i + 1];
 		i++;
 		j++;
 	}
@@ -130,19 +133,19 @@ static char	*read_file(int fd, char *buffer)
 	return (free(tmp_str), buffer);
 }
 
-int	main(void)
-{
-	int		fd;
-	char	*str;
-	int		i;
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*str;
+// 	int		i;
 
-	fd = open("./texts/read_error.txt", O_RDWR | O_CREAT, 0777);
-	i = 0;
-	while (i < 5)
-	{
-		str = get_next_line(fd);
-		printf("get_next_line():%s", str);
-		i++;
-		free(str);
-	}
-}
+// 	fd = open("./texts/giant_line_nl.txt", O_RDWR | O_CREAT, 0777);
+// 	i = 0;
+// 	while (i < 1)
+// 	{
+// 		str = get_next_line(fd);
+// 		printf("get_next_line():%s", str);
+// 		i++;
+// 		free(str);
+// 	}
+// }
