@@ -6,11 +6,24 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:53:24 by kkoray            #+#    #+#             */
-/*   Updated: 2024/11/02 14:54:32 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/11/02 16:19:49 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)b;
+	while (len > 0)
+	{
+		*(ptr++) = (unsigned char)c;
+		len--;
+	}
+	return (b);
+}
 
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -82,46 +95,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	res[sizetotal] = 0;
 	return (res);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	char	*dest;
-	size_t	i;
-
-	dest = (char *)malloc(ft_strlen(s1) + 1);
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	dest[i] = 0;
-	return (dest);
-}
-
-char	*ft_substr(char *s, unsigned int start, size_t len)
-{
-	size_t	i;
-	char	*str;
-
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		return (malloc(1));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	str = malloc((len + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		str[i] = s[start + i];
-		i++;
-	}
-	str[i] = 0;
-	return (str);
 }

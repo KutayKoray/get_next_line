@@ -6,7 +6,7 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:48:23 by kkoray            #+#    #+#             */
-/*   Updated: 2024/11/02 15:47:00 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/11/02 16:27:04 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,6 @@
 static char	*read_file(int fd, char *buffer);
 static char	*get_line(char *buffer);
 static char	*update_buffer(char *buffer, int i);
-void		*ft_memset(void *b, int c, size_t len);
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	unsigned char	*ptr;
-
-	ptr = (unsigned char *)b;
-	while (len > 0)
-	{
-		*(ptr++) = (unsigned char)c;
-		len--;
-	}
-	return (b);
-}
 
 char	*get_next_line(int fd)
 {
@@ -45,6 +31,10 @@ char	*get_next_line(int fd)
 		buffer = NULL;
 		return (NULL);
 	}
+	if (!buffer)
+		buffer = ft_calloc(1, 1);
+	if (!buffer)
+		return (NULL);
 	buffer = read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);
@@ -80,7 +70,7 @@ static char	*get_line(char *buffer)
 	}
 	if (buffer[i] == '\0')
 		line[i] = '\0';
-	else if(buffer[i] == '\n')
+	else if (buffer[i] == '\n')
 		line[i] = '\n';
 	buffer = update_buffer(buffer, i);
 	return (line);
@@ -113,17 +103,12 @@ static char	*read_file(int fd, char *buffer)
 	char	*tmp_str;
 	char	*tmp_buf;
 
-	if (!buffer)
-		buffer = ft_calloc(1, 1);
-	if (!buffer)
-		return (NULL);
 	tmp_str = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp_str)
 		return (free(tmp_str), free(buffer), NULL);
 	readed_bytes = 1;
 	while (readed_bytes > 0)
 	{
-		tmp_buf = NULL;
 		readed_bytes = read(fd, tmp_str, BUFFER_SIZE);
 		if (readed_bytes == -1)
 			return (free(tmp_str), NULL);
