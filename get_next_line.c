@@ -6,7 +6,7 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:48:23 by kkoray            #+#    #+#             */
-/*   Updated: 2024/10/30 20:53:12 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/11/02 12:09:53 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,11 @@ static char	*get_line(char *buffer)
 		line[i] = buffer[i];
 		i++;
 	}
-	buffer = update_buffer(buffer, i);
-	if (check_null(line) == 1)
+	if (buffer[i] == '\0')
 		line[i] = '\0';
-	else if (check_null(line) == -1)
-		return (NULL);
-	else
+	else if(buffer[i] == '\n')
 		line[i] = '\n';
+	buffer = update_buffer(buffer, i);
 	return (line);
 }
 
@@ -116,6 +114,7 @@ static char	*read_file(int fd, char *buffer)
 	readed_bytes = 1;
 	while (readed_bytes > 0)
 	{
+		tmp_buf = NULL;
 		readed_bytes = read(fd, tmp_str, BUFFER_SIZE);
 		if (readed_bytes == -1)
 			return (free(tmp_str), NULL);
@@ -137,9 +136,9 @@ int	main(void)
 	char	*str;
 	int		i;
 
-	fd = open("./texts/variable_nls.txt", O_RDWR | O_CREAT, 0777);
+	fd = open("./texts/read_error.txt", O_RDWR | O_CREAT, 0777);
 	i = 0;
-	while (i < 13)
+	while (i < 5)
 	{
 		str = get_next_line(fd);
 		printf("get_next_line():%s", str);

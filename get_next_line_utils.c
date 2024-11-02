@@ -6,7 +6,7 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:53:24 by kkoray            #+#    #+#             */
-/*   Updated: 2024/10/30 20:51:37 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/11/02 12:02:08 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	res[sizetotal] = 0;
 	return (res);
-}
-
-int check_null(char *str)
-{
-	int i;
-
-	i = 0;
-	if (!str)
-		return (-1);
-	while (str[i] != '\0')
-		i++;
-	if (str[i] == '0')
-		return (1);
-	else
-		return (0);
-	return (-1);
 }
 
 // char	*ft_strdup(const char *s1)
