@@ -119,3 +119,54 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
+
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#define TEST_FD_COUNT 1050  // Test için açılacak dosya sayısını MAX_FD'nin üzerine çıkaralım
+
+int main()
+{
+    int fds[TEST_FD_COUNT];
+    char *line;
+    int i;
+
+    // Dosyaları aç veya oluştur ve dosya sınırını aşmaya çalış
+    for (i = 0; i < TEST_FD_COUNT; i++)
+    {
+        char filename[20];
+        sprintf(filename, "test_file_%d.txt", i);
+
+        // Dosya yoksa oluştur, varsa sadece okuma modunda aç
+        fds[i] = open(filename, O_RDWR | O_CREAT, 0644);
+		write(fds[i], "Hello, World!\n", 15);
+        if (fds[i] == -1)
+        {
+            perror("Dosya açma hatası: FD sınırına ulaşıldı mı?");
+            break;
+        }
+    }
+
+    // Açılabilen dosyalar için get_next_line çağır
+    for (int j = 0; j < i; j++)
+    {
+        printf("Dosya %d'den satır okuma:\n", j);
+        line = get_next_line(fds[j]);
+        while (line)
+        {
+            printf("%s", line);
+            free(line);
+            line = get_next_line(fds[j]);
+        }
+        printf("\n");
+    }
+
+    // Açık dosyaları kapat
+    for (int j = 0; j < i; j++)
+        close(fds[j]);
+
+    return 0;
+}
+

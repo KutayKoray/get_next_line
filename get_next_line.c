@@ -119,3 +119,18 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
+
+#include <stdio.h>
+#include <fcntl.h>
+
+int main ()
+{
+	int		fd;
+	char	*line;
+
+	fd = open("test3.txt", O_RDONLY);
+	line = get_next_line(fd);
+	printf("%s", line);
+	close(fd);
+	return (0);
+}
