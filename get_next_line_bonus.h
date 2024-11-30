@@ -6,7 +6,7 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:47:37 by kkoray            #+#    #+#             */
-/*   Updated: 2024/11/03 13:42:57 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/11/03 16:05:21 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 10
 # endif
 
-# define MAX_FD 10
+# define MAX_FD 1024
 
 # include <stddef.h>
 

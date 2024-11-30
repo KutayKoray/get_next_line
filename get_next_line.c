@@ -6,7 +6,7 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 17:48:23 by kkoray            #+#    #+#             */
-/*   Updated: 2024/11/03 12:41:13 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/11/04 16:55:22 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static char	*read_file(int fd, char *buffer)
 
 	tmp_str = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!tmp_str)
-		return (free(tmp_str), free(buffer), NULL);
+		return (free(buffer), NULL);
 	readed_bytes = 1;
 	while (readed_bytes > 0)
 	{
@@ -80,7 +80,7 @@ static char	*read_file(int fd, char *buffer)
 		if (readed_bytes == -1)
 			return (free(tmp_str), NULL);
 		if (readed_bytes == 0)
-			return (free(tmp_str), buffer);
+			break ;
 		tmp_buf = ft_strjoin(buffer, tmp_str);
 		if (!tmp_buf)
 			return (free(tmp_str), free(buffer), NULL);
@@ -118,19 +118,4 @@ char	*get_next_line(int fd)
 		buffer = NULL;
 	}
 	return (line);
-}
-
-#include <stdio.h>
-#include <fcntl.h>
-
-int main ()
-{
-	int		fd;
-	char	*line;
-
-	fd = open("test3.txt", O_RDONLY);
-	line = get_next_line(fd);
-	printf("%s", line);
-	close(fd);
-	return (0);
 }

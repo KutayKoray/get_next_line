@@ -6,7 +6,7 @@
 /*   By: kkoray <kkoray@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:36 by kkoray            #+#    #+#             */
-/*   Updated: 2024/11/03 11:48:47 by kkoray           ###   ########.fr       */
+/*   Updated: 2024/11/03 16:12:53 by kkoray           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*ft_calloc(size_t count, size_t size)
 	return (tmp);
 }
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen(char *str)
 {
 	int	i;
 
@@ -56,7 +56,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *string, int searchedChar)
+char	*ft_strchr(char *string, int searchedChar)
 {
 	char	*str;
 
@@ -69,7 +69,7 @@ char	*ft_strchr(const char *string, int searchedChar)
 		return (NULL);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		sizetotal;
 	char	*res;
