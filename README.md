@@ -1,5 +1,5 @@
 <div align="center">
-    <img src=".github/assets/get_next_linem.png" alt="get next line badge">
+    <img src="https://raw.githubusercontent.com/ayogun/42-project-badges/refs/heads/main/badges/get_next_linee.png" alt="get next line badge">
     <h1>get_next_line</h1>
 </div>
 
