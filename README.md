@@ -3,8 +3,6 @@
     <h1>get_next_line</h1>
 </div>
 
-![norminette](https://github.com/lareii/get_next_line/actions/workflows/norminette.yml/badge.svg)
-
 📰 Reading a line from a fd is way too tedious.
 
 ## About
